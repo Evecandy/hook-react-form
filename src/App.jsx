@@ -9,7 +9,7 @@ const schema = yup.object({
   middleName: yup.string().required("Enter your middle name"),
   lastName: yup.string().required("Enter your last name"),
   email: yup.string(). matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, 'Enter a valid email address').required('Email is required'),
-  age: yup.number("Age should be a number").positive().integer().required("Age is compulsory").typeError("should be a number"),
+  age: yup.number("Age should be a number").min(12, "Minimum age accepted is 12").integer().required("Age is compulsory").typeError("should be a number"),
   typeOfDance: yup.string().required('Select a type of dance'),
 
 })
@@ -37,7 +37,7 @@ function App() {
       < input type = "text" id = "email" placeholder="email address" {...register("lastName")} />
       <p>{errors.email?.message}</p>
       <label htmlFor="age">Age</label>
-      < input type = "number" id = "age" placeholder="age" {...register("age", { min: 12, max: 70})} />
+      < input min="12" type = "number" id = "age" placeholder="age" {...register("age")} />
       <p>{errors.age?.message}</p>
       <label htmlFor="gender">Gender</label>
       <select id = "gender" name = "gender" {...register("gender")}>
